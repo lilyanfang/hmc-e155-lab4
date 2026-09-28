@@ -184,4 +184,5 @@ int main(void) {
             //when flag reset
         }
     }
+    return 0
 }
