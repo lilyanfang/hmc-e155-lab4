@@ -150,7 +150,7 @@ const int sevennation[][2] = {
 
 
 #define CLK_FRQ 4000000
-#define MUSIC notes
+#define MUSIC sevennation
 #define OUTPUT 4
 
 
@@ -163,14 +163,14 @@ int main(void) {
     pinMode(OUTPUT,GPIO_OUTPUT);
 
 
-    int length = sizeof(SONG)/sizeof(SONG[0]); //number of instructions in notes
+    int length = sizeof(MUSIC)/sizeof(MUSIC[0]); //number of instructions in notes
 
-    for (i=0; i<length; i++) {
-        int freq = t[i][0];
-        bool rest = (freq);
-        uint16_t count= CLK_FRQ/(2*freq)
+    for (int i=0; i<length; i++) {
+        int freq = MUSIC[i][0];
+        bool rest = !(freq);
+        uint16_t count= CLK_FRQ/(2*freq);
         TIM7->ARR = count-1; 
-        for (t=SONG[i][1]; t>0; t--) {
+        for (int t=MUSIC[i][1]; t>0; t--) {
             TIM6->CNT=0; //set counter to zero
             TIM6->SR=0; //reset flag to zero
             while (!(TIM6->SR)) {
@@ -184,5 +184,4 @@ int main(void) {
             //when flag reset
         }
     }
-    return 0
 }

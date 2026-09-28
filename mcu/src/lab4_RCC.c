@@ -18,7 +18,7 @@ void configurePLL() {
     // Load configuration
     // TODO: Set PLL SRC to MSI (PLLSRC=01)
     RCC->PLLCFGR&=~(1<<1); //bit 1 is 0
-    RCC->PLLCFRG|=1; //bit 0 is 1
+    RCC->PLLCFGR|=1; //bit 0 is 1
 
     // TODO: Set PLLN
     RCC->PLLCFGR&=~(0b1111111<<8);
