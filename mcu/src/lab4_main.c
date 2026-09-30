@@ -146,12 +146,31 @@ const int sevennation[][2] = {
     {233, 73},
     {262, 250},
     {233, 323},
+    {220, 968},
+    {294, 700},
+    {0, 26},
+    {294, 242},
+    {349, 323},
+    {294, 323},
+    {262, 323},
+    {233, 968},
+    {220, 968},
+    {294, 700},
+    {0, 26},
+    {294, 242},
+    {349, 323},
+    {294, 323},
+    {262, 323},
+    {233, 323},
+    {233, 73},
+    {262, 250},
+    {233, 323},
     {220, 968}};
 
 
-#define CLK_FRQ 4000000
-#define MUSIC sevennation
-#define OUTPUT 4
+#define CLK_FRQ 4000000 //frequency of input clock to TIM7
+#define MUSIC notes
+#define OUTPUT 4 //output to PB4
 
 
 
@@ -167,9 +186,9 @@ int main(void) {
 
     for (int i=0; i<length; i++) {
         int freq = MUSIC[i][0];
-        bool rest = !(freq);
-        uint16_t count= CLK_FRQ/(2*freq);
-        TIM7->ARR = count-1; 
+        bool rest = !(freq); 
+        uint16_t count= CLK_FRQ/(2*freq); //calculate what the count has to be
+        TIM7->ARR = count-1; //account for indexing starting at 0
         for (int t=MUSIC[i][1]; t>0; t--) {
             TIM6->CNT=0; //set counter to zero
             TIM6->SR=0; //reset flag to zero
