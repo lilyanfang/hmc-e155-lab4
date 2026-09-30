@@ -187,8 +187,10 @@ int main(void) {
     for (int i=0; i<length; i++) {
         int freq = MUSIC[i][0];
         bool rest = !(freq); 
-        uint16_t count= CLK_FRQ/(2*freq); //calculate what the count has to be
-        TIM7->ARR = count-1; //account for indexing starting at 0
+        if !(rest){
+            uint16_t count= CLK_FRQ/(2*freq); //calculate what the count has to be
+            TIM7->ARR = count-1; //account for indexing starting at 0
+        }
         for (int t=MUSIC[i][1]; t>0; t--) {
             TIM6->CNT=0; //set counter to zero
             TIM6->SR=0; //reset flag to zero
